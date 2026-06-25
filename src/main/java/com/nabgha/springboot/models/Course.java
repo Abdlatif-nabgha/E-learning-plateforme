@@ -22,7 +22,7 @@ public class Course extends BaseEntity {
 
     private String description;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "tutors_courses",
             joinColumns = {@JoinColumn(name = "course_id")},

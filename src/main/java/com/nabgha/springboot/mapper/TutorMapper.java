@@ -1,0 +1,45 @@
+package com.nabgha.springboot.mapper;
+
+
+import com.nabgha.springboot.dto.TutorRequestDTO;
+import com.nabgha.springboot.dto.TutorResponseDTO;
+import com.nabgha.springboot.models.Tutor;
+import org.mapstruct.Mapper;
+
+//@Component
+@Mapper(componentModel = "spring")
+public interface TutorMapper {
+
+    /***
+    // 1. TutorRequestDTO -> Tutor (Entity)
+    public Tutor toEntity(TutorRequestDTO dto) {
+        if (dto == null) return null;
+
+        return Tutor.builder()
+                .firstName(dto.firstName())
+                .lastName(dto.lastName())
+                .email(dto.email())
+                .build();
+    }
+
+    // 2. Tutor (Entity) -> TutorResponseDTO
+    public TutorResponseDTO toDTO(Tutor tutor) {
+        if (tutor == null) return null;
+
+        // Records use standard constructors for instantiation
+        return new TutorResponseDTO(
+                tutor.getId(),
+                tutor.getFirstName(),
+                tutor.getLastName(),
+                tutor.getEmail(),
+                tutor.getCreatedAt()
+        );
+    }
+     *****/
+
+    // 1. TutorRequestDTO -> Tutor (Entity)
+    Tutor toEntity(TutorRequestDTO dto);
+
+    // 2. Tutor (Entity) -> TutorResponseDTO
+    TutorResponseDTO toDTO(Tutor tutor);
+}

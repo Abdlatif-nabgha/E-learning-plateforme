@@ -26,15 +26,17 @@ public class TutorController {
     public ResponseEntity<TutorResponseDTO> createTutor(
             @Valid @RequestBody TutorRequestDTO requestDTO
     ) {
+        // 1. Create a new Tutor entity from the request DTO
         TutorResponseDTO createdTutor = tutorService.createTutor(requestDTO);
 
-        // Build the URI for the newly created resource (e.g., /api/v1/tutors/5)
+        // 2. Build the URI for the newly created resource (e.g., /api/v1/tutors/5)
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
                 .buildAndExpand(createdTutor.id())
                 .toUri();
 
+        // 3. Return a 201 Created response with the location header
         return ResponseEntity.created(location).body(createdTutor);
     }
 
@@ -58,14 +60,18 @@ public class TutorController {
     @PutMapping("/{id}")
     public ResponseEntity<TutorResponseDTO> updateTutor(
             @PathVariable Integer id,
-            @RequestBody TutorUpdateRequestDTO requestDTO
+            @RequestBody TutorUpdateRequestDTO requestDTO,
+            @RequestParam Integer requestingTutorId
     ) {
-        return  ResponseEntity.ok(tutorService.updateTutor(id, requestDTO));
+        return  ResponseEntity.ok(tutorService.updateTutor(id, requestDTO, requestingTutorId));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteTutor(@PathVariable Integer id) {
-        tutorService.deleteTutor(id);
+    public ResponseEntity<Void> deleteTutor(
+            @PathVariable Integer id,
+            @RequestParam Integer requestingTutorId
+    ) {
+        tutorService.deleteTutor(id, requestingTutorId);
         return ResponseEntity.noContent().build();
     }
 }

@@ -14,6 +14,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.nabgha.springboot.exception.UnauthorizedOperationException;
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
@@ -60,7 +61,11 @@ public class TutorServiceImpl implements TutorService {
 
     @Override
     @Transactional
-    public TutorResponseDTO updateTutor(Integer id, TutorUpdateRequestDTO tutorRequestDTO) {
+    public TutorResponseDTO updateTutor(Integer id, TutorUpdateRequestDTO tutorRequestDTO, Integer requestingTutorId) {
+        // ownership check
+        if (!id.equals(requestingTutorId)) {
+            throw new UnauthorizedOperationException("You are not authorized to update this tutor");
+        }
         Tutor tutor = tutorRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Tutor not found with id: "+ id));
 
@@ -76,7 +81,11 @@ public class TutorServiceImpl implements TutorService {
 
     @Override
     @Transactional
-    public void deleteTutor(Integer id) {
+    public void deleteTutor(Integer id, Integer requestingTutorId)  {
+        // ownership check
+        if (!id.equals(requestingTutorId)) {
+            throw new UnauthorizedOperationException("You are not authorized to delete this tutor");
+        }
         if (!tutorRepository.existsById(id)) {
             throw new EntityNotFoundException("Cannot delete: Tutor not found with id: " + id);
         }

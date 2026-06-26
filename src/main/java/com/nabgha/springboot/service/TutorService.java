@@ -7,6 +7,7 @@ import com.nabgha.springboot.dto.TutorUpdateRequestDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+
 public interface TutorService {
     TutorResponseDTO createTutor(TutorRequestDTO tutorRequestDTO);
 
@@ -16,7 +17,7 @@ public interface TutorService {
 
     Page<TutorResponseDTO> getAllTutors(Pageable pageable);
 
-    TutorResponseDTO updateTutor(Integer id, TutorUpdateRequestDTO tutorRequestDTO);
+    TutorResponseDTO updateTutor(Integer id, TutorUpdateRequestDTO dto, Integer requestingTutorId);
 
-    void deleteTutor(Integer id);
+    void deleteTutor(Integer id, Integer requestingTutorId);
 }

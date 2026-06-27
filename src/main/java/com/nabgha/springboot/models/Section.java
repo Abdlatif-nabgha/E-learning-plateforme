@@ -20,7 +20,7 @@ public class Section extends BaseEntity {
 
     private String name;
 
-    private int sectionOrder;
+    private Integer sectionOrder;
 
     @ManyToOne
     @JoinColumn(name = "course_id")

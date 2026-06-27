@@ -10,6 +10,7 @@ import com.nabgha.springboot.models.Tutor;
 import com.nabgha.springboot.repository.CourseRepository;
 import com.nabgha.springboot.repository.TutorRepository;
 import com.nabgha.springboot.service.CourseService;
+import com.nabgha.springboot.service.OwnershipValidator;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -25,6 +26,7 @@ public class CourseServiceImpl implements CourseService {
     private final CourseRepository courseRepository;
     private final CourseMapper courseMapper;
     private final TutorRepository tutorRepository;
+    private final OwnershipValidator ownershipValidator;
 
     @Override
     @Transactional
@@ -67,7 +69,7 @@ public class CourseServiceImpl implements CourseService {
         Course course = courseRepository.findById(courseId)
                 .orElseThrow(() -> new EntityNotFoundException("Course not found with id: "+ courseId));
         // 2. Verify that the requesting tutor is one of the tutors associated with this course
-        verifyOwnership(course, tutorId);
+        ownershipValidator.verifyCourseOwnership(course, tutorId);
 
         // 3. Update the course with the incoming DTO data
         if (dto.title() != null) {
@@ -89,7 +91,7 @@ public class CourseServiceImpl implements CourseService {
                 .orElseThrow(() -> new EntityNotFoundException("Course not found with id: "+ courseId));
 
         // 2. Verify that the requesting tutor is one of the tutors associated with this course
-        verifyOwnership(course, tutorId);
+        ownershipValidator.verifyCourseOwnership(course, tutorId);
 
         // 3. Delete the course from the database
         courseRepository.delete(course);
@@ -107,7 +109,7 @@ public class CourseServiceImpl implements CourseService {
                 .orElseThrow(() -> new EntityNotFoundException("Tutor not found with id: "+ newTutorId));
 
         // 3. Verify that the requesting tutor is one of the tutors associated with this course
-        verifyOwnership(course, requestingTutorId);
+        ownershipValidator.verifyCourseOwnership(course, requestingTutorId);
 
         // 4. Verify that the new tutor is not already associated with this course
         boolean alreadyIn = course.getTutors().stream()
@@ -133,7 +135,7 @@ public class CourseServiceImpl implements CourseService {
                         .orElseThrow(() -> new EntityNotFoundException("Tutor not found with id: "+ requestingTutorId));
 
         // 3. Verify that the requesting tutor is one of the tutors associated with this course
-        verifyOwnership(course, requestingTutorId);
+        ownershipValidator.verifyCourseOwnership(course, requestingTutorId);
 
         // 4. Remove the tutor from the course
         if (course.getTutors().size() == 1) {
@@ -142,16 +144,5 @@ public class CourseServiceImpl implements CourseService {
             );
         }
         course.removeTutor(tutor);
-    }
-
-    // =================== PRIVATE HELPERS ===================
-    private void verifyOwnership(Course course, Integer tutorId) {
-        boolean isTutor = course.getTutors().stream()
-                .anyMatch(tutor -> tutor.getId().equals(tutorId));
-        if (!isTutor) {
-            throw new UnauthorizedOperationException(
-                    "You don't have permission to modify this course"
-            );
-        }
     }
 }

@@ -12,7 +12,8 @@ public interface CourseMapper {
 
     //    CourseRequestDTO --> Course
     @Mapping(target = "id", ignore = true)
-    @Mapping(target ="tutors", ignore = true)
+    @Mapping(target = "tutors", ignore = true)
+    @Mapping(target = "sections", ignore = true)
     Course toEntity(CourseRequestDTO courseRequestDTO);
 
     //   Course --> CourseResponseDTO

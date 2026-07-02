@@ -1,7 +1,7 @@
 package com.nabgha.springboot.mapper;
 
-import com.nabgha.springboot.dto.CourseRequestDTO;
-import com.nabgha.springboot.dto.CourseResponseDTO;
+import com.nabgha.springboot.dto.request.CourseRequestDTO;
+import com.nabgha.springboot.dto.response.CourseResponseDTO;
 import com.nabgha.springboot.models.Course;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

@@ -1,4 +1,4 @@
-package com.nabgha.springboot.service;
+package com.nabgha.springboot.utils;
 
 import com.nabgha.springboot.exception.UnauthorizedOperationException;
 import com.nabgha.springboot.models.Course;

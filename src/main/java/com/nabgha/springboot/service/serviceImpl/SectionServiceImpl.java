@@ -1,19 +1,16 @@
 package com.nabgha.springboot.service.serviceImpl;
 
-import com.nabgha.springboot.dto.SectionRequestDTO;
-import com.nabgha.springboot.dto.SectionResponseDTO;
-import com.nabgha.springboot.dto.SectionUpdateRequestDTO;
-import com.nabgha.springboot.exception.UnauthorizedOperationException;
+import com.nabgha.springboot.dto.request.SectionRequestDTO;
+import com.nabgha.springboot.dto.response.SectionResponseDTO;
+import com.nabgha.springboot.dto.request.SectionUpdateRequestDTO;
 import com.nabgha.springboot.mapper.SectionMapper;
 import com.nabgha.springboot.models.Course;
 import com.nabgha.springboot.models.Section;
-import com.nabgha.springboot.models.Tutor;
 import com.nabgha.springboot.repository.CourseRepository;
 import com.nabgha.springboot.repository.SectionRepository;
 import com.nabgha.springboot.repository.TutorRepository;
-import com.nabgha.springboot.service.OwnershipValidator;
+import com.nabgha.springboot.utils.OwnershipValidator;
 import com.nabgha.springboot.service.SectionService;
-import jakarta.persistence.Entity;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

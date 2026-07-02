@@ -1,8 +1,8 @@
 package com.nabgha.springboot.controller;
 
-import com.nabgha.springboot.dto.CourseRequestDTO;
-import com.nabgha.springboot.dto.CourseResponseDTO;
-import com.nabgha.springboot.dto.CourseUpdateRequestDTO;
+import com.nabgha.springboot.dto.request.CourseRequestDTO;
+import com.nabgha.springboot.dto.response.CourseResponseDTO;
+import com.nabgha.springboot.dto.request.CourseUpdateRequestDTO;
 import com.nabgha.springboot.service.CourseService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

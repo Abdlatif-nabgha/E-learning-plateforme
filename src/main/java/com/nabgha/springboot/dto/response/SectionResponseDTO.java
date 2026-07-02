@@ -1,4 +1,4 @@
-package com.nabgha.springboot.dto;
+package com.nabgha.springboot.dto.response;
 
 public record SectionResponseDTO(
         Integer id,

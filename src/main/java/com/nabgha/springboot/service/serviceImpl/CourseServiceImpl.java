@@ -1,16 +1,15 @@
 package com.nabgha.springboot.service.serviceImpl;
 
-import com.nabgha.springboot.dto.CourseRequestDTO;
-import com.nabgha.springboot.dto.CourseResponseDTO;
-import com.nabgha.springboot.dto.CourseUpdateRequestDTO;
-import com.nabgha.springboot.exception.UnauthorizedOperationException;
+import com.nabgha.springboot.dto.request.CourseRequestDTO;
+import com.nabgha.springboot.dto.response.CourseResponseDTO;
+import com.nabgha.springboot.dto.request.CourseUpdateRequestDTO;
 import com.nabgha.springboot.mapper.CourseMapper;
 import com.nabgha.springboot.models.Course;
 import com.nabgha.springboot.models.Tutor;
 import com.nabgha.springboot.repository.CourseRepository;
 import com.nabgha.springboot.repository.TutorRepository;
 import com.nabgha.springboot.service.CourseService;
-import com.nabgha.springboot.service.OwnershipValidator;
+import com.nabgha.springboot.utils.OwnershipValidator;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;

@@ -1,9 +1,9 @@
 package com.nabgha.springboot.service;
 
 
-import com.nabgha.springboot.dto.TutorRequestDTO;
-import com.nabgha.springboot.dto.TutorResponseDTO;
-import com.nabgha.springboot.dto.TutorUpdateRequestDTO;
+import com.nabgha.springboot.dto.request.TutorRequestDTO;
+import com.nabgha.springboot.dto.response.TutorResponseDTO;
+import com.nabgha.springboot.dto.request.TutorUpdateRequestDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

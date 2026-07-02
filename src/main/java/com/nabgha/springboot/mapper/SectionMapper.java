@@ -1,7 +1,7 @@
 package com.nabgha.springboot.mapper;
 
-import com.nabgha.springboot.dto.SectionRequestDTO;
-import com.nabgha.springboot.dto.SectionResponseDTO;
+import com.nabgha.springboot.dto.request.SectionRequestDTO;
+import com.nabgha.springboot.dto.response.SectionResponseDTO;
 import com.nabgha.springboot.models.Section;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

@@ -1,8 +1,8 @@
 package com.nabgha.springboot.mapper;
 
 
-import com.nabgha.springboot.dto.TutorRequestDTO;
-import com.nabgha.springboot.dto.TutorResponseDTO;
+import com.nabgha.springboot.dto.request.TutorRequestDTO;
+import com.nabgha.springboot.dto.response.TutorResponseDTO;
 import com.nabgha.springboot.models.Tutor;
 import org.mapstruct.Mapper;
 

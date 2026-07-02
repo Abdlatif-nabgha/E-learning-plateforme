@@ -1,9 +1,9 @@
 package com.nabgha.springboot.service;
 
 
-import com.nabgha.springboot.dto.SectionRequestDTO;
-import com.nabgha.springboot.dto.SectionResponseDTO;
-import com.nabgha.springboot.dto.SectionUpdateRequestDTO;
+import com.nabgha.springboot.dto.request.SectionRequestDTO;
+import com.nabgha.springboot.dto.response.SectionResponseDTO;
+import com.nabgha.springboot.dto.request.SectionUpdateRequestDTO;
 
 public interface SectionService {
 

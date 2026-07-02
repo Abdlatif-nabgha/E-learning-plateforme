@@ -1,8 +1,8 @@
 package com.nabgha.springboot.service.serviceImpl;
 
-import com.nabgha.springboot.dto.TutorRequestDTO;
-import com.nabgha.springboot.dto.TutorResponseDTO;
-import com.nabgha.springboot.dto.TutorUpdateRequestDTO;
+import com.nabgha.springboot.dto.request.TutorRequestDTO;
+import com.nabgha.springboot.dto.response.TutorResponseDTO;
+import com.nabgha.springboot.dto.request.TutorUpdateRequestDTO;
 import com.nabgha.springboot.mapper.TutorMapper;
 import com.nabgha.springboot.models.Tutor;
 import com.nabgha.springboot.repository.TutorRepository;

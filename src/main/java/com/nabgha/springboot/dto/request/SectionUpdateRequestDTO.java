@@ -1,4 +1,4 @@
-package com.nabgha.springboot.dto;
+package com.nabgha.springboot.dto.request;
 
 public record SectionUpdateRequestDTO(
         String name,         // nullable → update partial

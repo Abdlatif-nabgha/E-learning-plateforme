@@ -1,9 +1,9 @@
 package com.nabgha.springboot.service;
 
 
-import com.nabgha.springboot.dto.CourseRequestDTO;
-import com.nabgha.springboot.dto.CourseResponseDTO;
-import com.nabgha.springboot.dto.CourseUpdateRequestDTO;
+import com.nabgha.springboot.dto.request.CourseRequestDTO;
+import com.nabgha.springboot.dto.response.CourseResponseDTO;
+import com.nabgha.springboot.dto.request.CourseUpdateRequestDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

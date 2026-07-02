@@ -1,8 +1,8 @@
 package com.nabgha.springboot.controller;
 
-import com.nabgha.springboot.dto.SectionRequestDTO;
-import com.nabgha.springboot.dto.SectionResponseDTO;
-import com.nabgha.springboot.dto.SectionUpdateRequestDTO;
+import com.nabgha.springboot.dto.request.SectionRequestDTO;
+import com.nabgha.springboot.dto.response.SectionResponseDTO;
+import com.nabgha.springboot.dto.request.SectionUpdateRequestDTO;
 import com.nabgha.springboot.service.SectionService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

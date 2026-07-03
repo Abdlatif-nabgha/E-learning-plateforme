@@ -43,7 +43,7 @@ public class TextServiceImpl implements TextService {
         ownershipValidator.verifyCourseOwnership(lecture.getSection().getCourse(), tutorId);
 
         if (lecture.getResource() != null) {
-            throw new EntityNotFoundException("Lecture with id " + lectureId + " already exists");
+            throw new IllegalArgumentException("Lecture with id " + lectureId + " already has a resource");
         }
 
         Text text = textMapper.toEntity(request);
@@ -77,6 +77,11 @@ public class TextServiceImpl implements TextService {
                 .orElseThrow(() -> new EntityNotFoundException("text not found with id: "+ textId));
 
         ownershipValidator.verifyCourseOwnership(text.getLecture().getSection().getCourse(), tutorId);
+        
+        if (text.getLecture() != null) {
+            text.getLecture().setResource(null);
+        }
+        
         resourceRepository.delete(text);
     }
 }

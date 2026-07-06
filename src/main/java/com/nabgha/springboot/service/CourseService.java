@@ -13,6 +13,6 @@ public interface CourseService {
     CourseResponseDTO getCourseById(Integer id);
     CourseResponseDTO updateCourse(Integer id, CourseUpdateRequestDTO course, Integer tutorId);
     void deleteCourse(Integer id, Integer tutorId);
-    CourseResponseDTO addTutorToCourse(Integer courseId, Integer newTutorId, Integer requestingTutorId);
+    CourseResponseDTO addTutorToCourse(Integer courseId, String newTutorEmail, Integer requestingTutorId);
     void removeTutorFromCourse(Integer courseId, Integer requestingTutorId);
 }

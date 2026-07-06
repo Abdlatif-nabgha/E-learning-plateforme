@@ -72,14 +72,14 @@ public class CourseController {
         return ResponseEntity.noContent().build();
     }
 
-    @PutMapping("/{courseId}/tutors/{newTutorId}")
+    @PutMapping("/{courseId}/tutors/{newTutorEmail}")
     public ResponseEntity<CourseResponseDTO> addTutorToCourse(
             @PathVariable Integer courseId,
-            @PathVariable Integer newTutorId,
+            @PathVariable String newTutorEmail,
             @RequestParam Integer requestingTutorId
     ) {
         return ResponseEntity
-                .ok(courseService.addTutorToCourse(courseId, newTutorId, requestingTutorId));
+                .ok(courseService.addTutorToCourse(courseId, newTutorEmail, requestingTutorId));
     }
 
     @DeleteMapping("/{courseId}/tutors")

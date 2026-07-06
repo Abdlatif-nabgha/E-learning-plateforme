@@ -98,21 +98,21 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     @Transactional
-    public CourseResponseDTO addTutorToCourse(Integer courseId, Integer newTutorId, Integer requestingTutorId) {
+    public CourseResponseDTO addTutorToCourse(Integer courseId, String newTutorEmail, Integer requestingTutorId) {
         //1. Fetch the course and the new tutor from the database
         Course course = courseRepository.findById(courseId)
                 .orElseThrow(() -> new EntityNotFoundException("Course not found with id: "+ courseId));
 
         // 2. Fetch the tutor who is creating this course from the database
-        Tutor newTutor = tutorRepository.findById(newTutorId)
-                .orElseThrow(() -> new EntityNotFoundException("Tutor not found with id: "+ newTutorId));
+        Tutor newTutor = tutorRepository.findByEmail(newTutorEmail)
+                .orElseThrow(() -> new EntityNotFoundException("Tutor not found with id: "+ newTutorEmail));
 
         // 3. Verify that the requesting tutor is one of the tutors associated with this course
         ownershipValidator.verifyCourseOwnership(course, requestingTutorId);
 
         // 4. Verify that the new tutor is not already associated with this course
         boolean alreadyIn = course.getTutors().stream()
-                        .anyMatch(tutor -> tutor.getId().equals(newTutorId));
+                        .anyMatch(tutor -> tutor.getEmail().equals(newTutorEmail));
         if (alreadyIn) {
             throw new IllegalStateException(
                     "This tutor is already associated with this course"

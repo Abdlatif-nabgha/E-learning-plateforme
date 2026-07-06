@@ -4,7 +4,6 @@ import com.nabgha.springboot.dto.request.TextRequestDTO;
 import com.nabgha.springboot.dto.request.TextUpdateRequestDTO;
 import com.nabgha.springboot.dto.response.ResourceResponseDTO;
 import com.nabgha.springboot.mapper.TextMapper;
-import com.nabgha.springboot.models.File;
 import com.nabgha.springboot.models.Lecture;
 import com.nabgha.springboot.models.Text;
 import com.nabgha.springboot.repository.LectureRepository;
@@ -13,13 +12,13 @@ import com.nabgha.springboot.repository.TutorRepository;
 import com.nabgha.springboot.service.TextService;
 import com.nabgha.springboot.utils.OwnershipValidator;
 import jakarta.persistence.EntityNotFoundException;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
-@Transactional
+@Transactional(readOnly = true)
 public class TextServiceImpl implements TextService {
 
 
@@ -77,10 +76,6 @@ public class TextServiceImpl implements TextService {
                 .orElseThrow(() -> new EntityNotFoundException("text not found with id: "+ textId));
 
         ownershipValidator.verifyCourseOwnership(text.getLecture().getSection().getCourse(), tutorId);
-        
-        if (text.getLecture() != null) {
-            text.getLecture().setResource(null);
-        }
         
         resourceRepository.delete(text);
     }

@@ -31,6 +31,10 @@ public class Tutor extends BaseEntity{
     @Column(unique = true, nullable = false, length = 35)
     private String email;
 
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
     @ManyToMany(mappedBy = "tutors")
     @ToString.Exclude
     @Builder.Default

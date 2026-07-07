@@ -14,7 +14,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "users")
-@NoArgsConstructor @AllArgsConstructor @Setter @Getter @Builder
+@Builder @NoArgsConstructor @AllArgsConstructor @Getter @Setter
 @NullMarked
 public class User extends BaseEntity implements UserDetails {
 
@@ -23,6 +23,12 @@ public class User extends BaseEntity implements UserDetails {
 
     @Column(nullable = false)
     private String password;
+
+    @Column(name = "f_name")
+    private String firstName;
+
+    @Column(name = "l_name")
+    private String lastName;
 
     @Enumerated(EnumType.STRING)
     private Role role;
@@ -36,12 +42,12 @@ public class User extends BaseEntity implements UserDetails {
     }
 
     @Override
-    public  String getPassword() {
-        return password;
+    public String getUsername() {
+        return email;
     }
 
     @Override
-    public String getUsername() {
-        return email;
+    public String getPassword() {
+        return password;
     }
 }

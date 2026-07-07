@@ -5,6 +5,7 @@ import com.nabgha.springboot.dto.request.TutorRequestDTO;
 import com.nabgha.springboot.dto.response.TutorResponseDTO;
 import com.nabgha.springboot.models.Tutor;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 //@Component
 @Mapper(componentModel = "spring")
@@ -41,5 +42,8 @@ public interface TutorMapper {
     Tutor toEntity(TutorRequestDTO dto);
 
     // 2. Tutor (Entity) -> TutorResponseDTO
+    @Mapping(target = "firstName", source = "user.firstName")
+    @Mapping(target = "lastName", source = "user.lastName")
+    @Mapping(target = "email", source = "user.email")
     TutorResponseDTO toDTO(Tutor tutor);
 }

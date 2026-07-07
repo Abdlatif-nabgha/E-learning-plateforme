@@ -16,20 +16,7 @@ import java.util.List;
 @Builder
 @Entity
 @Table(name = "tutors")
-@NamedQuery(
-        name = "Tutor.findByName",
-        query = "select a from Tutor a where a.firstName = :firstName and a.lastName = :lastName"
-)
 public class Tutor extends BaseEntity{
-
-    @Column(name = "f_name", length = 25)
-    private String firstName;
-
-    @Column(name = "l_name", length = 25)
-    private String lastName;
-
-    @Column(unique = true, nullable = false, length = 35)
-    private String email;
 
     @OneToOne
     @JoinColumn(name = "user_id")

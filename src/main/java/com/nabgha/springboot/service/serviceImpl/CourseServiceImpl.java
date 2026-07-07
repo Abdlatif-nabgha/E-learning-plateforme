@@ -104,7 +104,7 @@ public class CourseServiceImpl implements CourseService {
                 .orElseThrow(() -> new EntityNotFoundException("Course not found with id: "+ courseId));
 
         // 2. Fetch the tutor who is creating this course from the database
-        Tutor newTutor = tutorRepository.findByEmail(newTutorEmail)
+        Tutor newTutor = tutorRepository.findUserByEmail(newTutorEmail)
                 .orElseThrow(() -> new EntityNotFoundException("Tutor not found with id: "+ newTutorEmail));
 
         // 3. Verify that the requesting tutor is one of the tutors associated with this course
@@ -112,7 +112,7 @@ public class CourseServiceImpl implements CourseService {
 
         // 4. Verify that the new tutor is not already associated with this course
         boolean alreadyIn = course.getTutors().stream()
-                        .anyMatch(tutor -> tutor.getEmail().equals(newTutorEmail));
+                        .anyMatch(tutor -> tutor.getUser().getEmail().equals(newTutorEmail));
         if (alreadyIn) {
             throw new IllegalStateException(
                     "This tutor is already associated with this course"

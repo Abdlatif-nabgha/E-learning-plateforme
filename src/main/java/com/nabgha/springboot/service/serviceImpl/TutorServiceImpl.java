@@ -5,7 +5,9 @@ import com.nabgha.springboot.dto.response.TutorResponseDTO;
 import com.nabgha.springboot.dto.request.TutorUpdateRequestDTO;
 import com.nabgha.springboot.mapper.TutorMapper;
 import com.nabgha.springboot.models.Tutor;
+import com.nabgha.springboot.models.User;
 import com.nabgha.springboot.repository.TutorRepository;
+import com.nabgha.springboot.repository.UserRepository;
 import com.nabgha.springboot.service.TutorService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,13 +24,14 @@ public class TutorServiceImpl implements TutorService {
 
     private final TutorRepository tutorRepository;
     private final TutorMapper tutorMapper;
+    private final UserRepository userRepository;
 
 
     @Override
     @Transactional
     public TutorResponseDTO createTutor(TutorRequestDTO tutorRequestDTO) {
         //  Validate unique email before attempting insertion
-        if (tutorRepository.existsByEmail(tutorRequestDTO.email())) {
+        if (userRepository.existsByEmail(tutorRequestDTO.email())) {
             throw new IllegalArgumentException("A tutor with this email already exists");
         }
 
@@ -48,7 +51,7 @@ public class TutorServiceImpl implements TutorService {
 
     @Override
     public TutorResponseDTO getTutorByEmail(String email) {
-        Tutor tutor = tutorRepository.findByEmail(email)
+        Tutor tutor = tutorRepository.findUserByEmail(email)
                 .orElseThrow(() -> new EntityNotFoundException("Tutor not found with email: "+ email));
         return tutorMapper.toDTO(tutor);
     }
@@ -69,13 +72,10 @@ public class TutorServiceImpl implements TutorService {
         Tutor tutor = tutorRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Tutor not found with id: "+ id));
 
-        if (tutorRequestDTO.firstName() != null) {
-            tutor.setFirstName(tutorRequestDTO.firstName());
-        }
-        if (tutorRequestDTO.lastName() != null) {
-            tutor.setLastName(tutorRequestDTO.lastName());
-        }
-        // Update other fields as needed
+        User user = tutor.getUser();
+        if (tutorRequestDTO.firstName() != null) user.setFirstName(tutorRequestDTO.firstName());
+        if (tutorRequestDTO.lastName() != null) user.setLastName(tutorRequestDTO.lastName());
+
         return tutorMapper.toDTO(tutor);
     }
 

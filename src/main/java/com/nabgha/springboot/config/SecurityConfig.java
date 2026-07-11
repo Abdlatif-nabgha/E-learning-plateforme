@@ -50,12 +50,12 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/api/v1/courses").permitAll()
 
                         // ===== ADMIN ONLY =====
-                        .requestMatchers("/api/v1/admin/**").hasAuthority("ROLE_ADMIN")
+                        .requestMatchers("/api/v1/admin/**").hasAuthority("ADMIN")
 
                         // ===== TUTOR ONLY =====
-                        .requestMatchers(HttpMethod.POST, "/api/v1/courses/**").hasAuthority("ROLE_TUTOR")
-                        .requestMatchers(HttpMethod.PUT, "/api/v1/courses/**").hasAuthority("ROLE_TUTOR")
-                        .requestMatchers(HttpMethod.DELETE, "/api/v1/courses/**").hasAuthority("ROLE_TUTOR")
+                        .requestMatchers(HttpMethod.POST, "/api/v1/courses/**").hasAuthority("TUTOR")
+                        .requestMatchers(HttpMethod.PUT, "/api/v1/courses/**").hasAuthority("TUTOR")
+                        .requestMatchers(HttpMethod.DELETE, "/api/v1/courses/**").hasAuthority("TUTOR")
 
                         // ===== TOUT LE RESTE → AUTHENTIFIÉ =====
                         .anyRequest().authenticated()
